@@ -4,6 +4,8 @@ spring:
     username: ${DB_USER}
     password: ${DB_PASS}
     driver-class-name: oracle.jdbc.OracleDriver
+  jpa:
+    database-platform: org.hibernate.dialect.Oracle12cDialect
   http:
     converters:
       preferred-json-mapper: jackson
