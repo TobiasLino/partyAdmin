@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>br.toba</groupId>
 	<artifactId>party</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>party</name>
 	<description>Party items </description>
 	<properties>
@@ -52,6 +52,12 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>com.pineapple</groupId>
+			<artifactId>pineapple-commons</artifactId>
+			<version>0.4</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -68,7 +74,41 @@
 					</excludes>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>com.spotify</groupId>
+				<artifactId>dockerfile-maven-plugin</artifactId>
+				<version>1.4.13</version>
+				<executions>
+					<execution>
+						<id>default</id>
+						<goals>
+							<goal>build</goal>
+							<goal>push</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<useMavenSettingsForAuth>true</useMavenSettingsForAuth>
+					<repository>${project.build.finalName}</repository>
+					<tag>${project.version}</tag>
+					<buildArgs>
+						<JAR_FILE>${project.build.finalName}.jar</JAR_FILE>
+					</buildArgs>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
+
+	<repositories>
+		<repository>
+			<id>project.local</id>
+			<name>project</name>
+			<url>file:${project.basedir}/repo</url>
+		</repository>
+		<repository>
+			<id>Repo1</id>
+			<url>https://repo1.maven.org/maven2/</url>
+		</repository>
+	</repositories>
 
 </project>
