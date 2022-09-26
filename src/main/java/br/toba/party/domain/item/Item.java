@@ -1,10 +1,7 @@
 package br.toba.party.domain.item;
 
 import br.toba.party.domain.itemresponsible.ItemResponsible;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -17,6 +14,7 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Item {
 
     @Id
@@ -29,16 +27,13 @@ public class Item {
     @Column(name = "category")
     private String category;
 
-    @Column(name = "unit_vql")
+    @Column(name = "unit_val")
     private BigDecimal unitValue;
 
     @Column(name = "quant")
-    private Integer quantity;
+    private Long quantity;
 
     @Column(name = "quant_type")
     private String quantityType;
-
-    @OneToMany(mappedBy = "item")
-    private Set<ItemResponsible> responsibles;
 
 }
